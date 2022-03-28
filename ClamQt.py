@@ -3,7 +3,7 @@ import sys
 import os
 from PyQt5.QtCore import  QEventLoop, QTimer ,Qt
 from PyQt5.QtWidgets import QApplication, QMainWindow
-from freshclam import execute_fresh,execute_scan
+from execute import execute_fresh,execute_scan
  
 from MainUI import Ui_MainWindow
 
