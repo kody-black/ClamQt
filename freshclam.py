@@ -33,20 +33,18 @@ class ControlBoard(QDialog, Ui_Dialog):
         self.textBrowser.ensureCursorVisible()
  
     def fresh(self):
-        """Runs the main function."""
-        print('Begin')
+        print('更新病毒库中\n请稍候......\n')
         d = os.popen("freshclam")
         f = d.read()
         print(f)
-        print("End")
+        print("更新完成!\n")
  
     def scan(self):
-        """Runs the main function."""
-        print('Begin')
+        print('病毒扫描中\n请稍候......\n')
         d = os.popen("clamscan")
         f = d.read()
         print(f)
-        print("End")
+        print("扫描完成!\n")
      
 
 def execute_fresh():
@@ -57,7 +55,7 @@ def execute_fresh():
 
 def execute_scan():
     win = ControlBoard()
-    win.setWindowTitle('saomiao')
+    win.setWindowTitle('病毒扫描')
     win.show()
     win.scan()
     win.exec_()
