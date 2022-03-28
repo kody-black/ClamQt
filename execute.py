@@ -6,7 +6,7 @@ import os
 from PyQt5.QtCore import  QEventLoop, QTimer
 from PyQt5.QtWidgets import QApplication, QMainWindow,QDialog
  
-from freshclamUI import Ui_Dialog
+from exeUI import Ui_Dialog
  
 class EmittingStr(QtCore.QObject):
         textWritten = QtCore.pyqtSignal(str)  #定义一个发送str的信号
