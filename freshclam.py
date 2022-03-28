@@ -49,6 +49,7 @@ class ControlBoard(QDialog, Ui_Dialog):
 
 def execute_fresh():
     win = ControlBoard()
+    win.setWindowTitle('病毒库更新')
     win.show()
     win.fresh()
     win.exec_()

@@ -32,4 +32,4 @@ class Ui_Dialog(object):
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
-        Dialog.setWindowTitle(_translate("Dialog", "更新病毒库"))
+        Dialog.setWindowTitle(_translate("Dialog", "命令窗口"))
