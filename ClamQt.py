@@ -146,7 +146,7 @@ class WHITEWindow(QWidget):
 
     def initUI(self):
         self.setWindowTitle("白名单")
-        self.resize(357, 507)
+        self.resize(557, 507)
         conLayout = QHBoxLayout()
         tableWidget1 = QTableWidget()
         tableWidget1.setRowCount(4)
@@ -172,11 +172,11 @@ class WHITEWindow(QWidget):
 
     def add(self, tableWidget):
         openfilename1 = QFileDialog.getExistingDirectory(self, '选择文件夹')
-        tableWidget.setItem(openfilename1)
+        tableWidget.setItem(0, 0, QtWidgets.QTableWidgetItem(openfilename1))
 
     def minus(self, tableWidget):
         openfilename2 = QFileDialog.getExistingDirectory(self, '选择文件夹')
-        tableWidget.setItem(openfilename2)
+        #tableWidget.setItem(openfilename2)
 
 
 
