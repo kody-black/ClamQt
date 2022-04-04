@@ -8,6 +8,8 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QDialog, QFileDialog, QCh
  
 from exeUI import Ui_Dialog
 
+setor = [0, 0, 0, 0, 0, 0] #这个数组用来记录设置选择的内容
+
 class EmittingStr(QtCore.QObject):
         textWritten = QtCore.pyqtSignal(str)  #定义一个发送str的信号
         def write(self, text):
@@ -15,7 +17,6 @@ class EmittingStr(QtCore.QObject):
             loop = QEventLoop()
             QTimer.singleShot(1000, loop.quit)
             loop.exec_()
- 
  
 class ControlBoard(QDialog, Ui_Dialog):
     def __init__(self):
@@ -48,12 +49,15 @@ class ControlBoard(QDialog, Ui_Dialog):
 
     def choose(openfilename):
         print('病毒扫描中\n请稍候......\n')
-        a = 'clamscan'+' '+openfilename
-        #print(a)
+        if setor[3]== 1:
+            a = 'clamscan'+' '+'--max-filesize=#20'+' '+openfilename
+        else:
+            a = 'clamscan'+' '+openfilename
         d = os.popen(a)
         f = d.read()
         print(f)
         print("扫描完成!\n")
+        
 
 
 def execute_fresh():

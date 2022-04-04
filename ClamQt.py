@@ -7,7 +7,7 @@ from execute import execute_fresh, execute_scan, execute_choose
 from execute import *
 from MainUI import Ui_MainWindow
 
-setor = [0, 0, 0, 0, 0, 0] #这个数组用来记录设置选择的内容
+# setor = [0, 0, 0, 0, 0, 0] #这个数组用来记录设置选择的内容
 
 class Window(QMainWindow, Ui_MainWindow):
     def __init__(self):
@@ -60,6 +60,7 @@ class Window(QMainWindow, Ui_MainWindow):
 
 #设置界面布局（似乎不该写在这个文件里，后续调整）
 class SETWindow(QWidget):
+    global setor
     def __init__(self):
         super().__init__()
         self.initUI()
@@ -73,7 +74,7 @@ class SETWindow(QWidget):
         self.cb5 = QCheckBox("Scan directories recursively", self)
         self.cb6 = QCheckBox("Check for updates to this program", self)
 
-        bt = QPushButton('Back')
+        bt = QPushButton('Back',self)
 
         self.resize(357, 507)
         self.setWindowTitle('设置')
@@ -147,29 +148,33 @@ class WHITEWindow(QWidget):
         self.setWindowTitle("白名单")
         self.resize(357, 507)
         conLayout = QHBoxLayout()
-        tableWidget = QTableWidget()
-        tableWidget.setRowCount(4)
-        tableWidget.setColumnCount(1)
-        conLayout.addWidget(tableWidget)
+        tableWidget1 = QTableWidget()
+        tableWidget1.setRowCount(4)
+        tableWidget1.setColumnCount(1)
+        conLayout.addWidget(tableWidget1)
 
-        tableWidget.setHorizontalHeaderLabels(['Directory'])
-        tableWidget.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        tableWidget1.setHorizontalHeaderLabels(['Directory'])
+        tableWidget1.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         
-        add = QPushButton('添加文件',self)
-        minus = QPushButton('移出文件',self)
+
+        add = QPushButton('添加文件', self)
+        minus = QPushButton('移出文件', self)
         add.move(30, 320)
         minus.move(270, 320)
 
+        conLayout.addWidget(add)
+        conLayout.addWidget(minus)
+
         self.setLayout(conLayout)
 
-        add.clicked.connect(lambda:self.add(tableWidget))
-        minus.clicked.connect(lambda:self.minus(tableWidget))
+        add.clicked.connect(lambda: self.add(tableWidget1))
+        minus.clicked.connect(lambda: self.minus(tableWidget1))
 
-    def add(self,tableWidget):
+    def add(self, tableWidget):
         openfilename1 = QFileDialog.getExistingDirectory(self, '选择文件夹')
         tableWidget.setItem(openfilename1)
 
-    def minus(self,tableWidget):
+    def minus(self, tableWidget):
         openfilename2 = QFileDialog.getExistingDirectory(self, '选择文件夹')
         tableWidget.setItem(openfilename2)
 
