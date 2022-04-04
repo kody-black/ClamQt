@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 # -*- coding:utf-8 -*- 
-from PyQt5 import QtCore, QtGui
+from PyQt5 import QtCore, QtGui, QtWidgets
 import sys
 import os
-from PyQt5.QtCore import  QEventLoop, QTimer
-from PyQt5.QtWidgets import QApplication, QMainWindow,QDialog
+from PyQt5.QtCore import  QEventLoop, QTimer, Qt
+from PyQt5.QtWidgets import QApplication, QMainWindow, QDialog, QFileDialog, QCheckBox, QPushButton, QWidget
  
 from exeUI import Ui_Dialog
- 
+
 class EmittingStr(QtCore.QObject):
         textWritten = QtCore.pyqtSignal(str)  #定义一个发送str的信号
         def write(self, text):
@@ -45,7 +45,16 @@ class ControlBoard(QDialog, Ui_Dialog):
         f = d.read()
         print(f)
         print("扫描完成!\n")
-     
+
+    def choose(openfilename):
+        print('病毒扫描中\n请稍候......\n')
+        a = 'clamscan'+' '+openfilename
+        #print(a)
+        d = os.popen(a)
+        f = d.read()
+        print(f)
+        print("扫描完成!\n")
+
 
 def execute_fresh():
     win = ControlBoard()
@@ -60,3 +69,17 @@ def execute_scan():
     win.show()
     win.scan()
     win.exec_()
+
+def execute_choose(openfilename):
+    win = ControlBoard()
+    win.setWindowTitle('选择文件扫描')
+    win.show()
+    win.choose(openfilename)
+    win.exec_()
+
+# def execute_set():
+#     set1 = SETWindow()
+#     # set1.exec()
+
+# def openfile(self):
+#     openfile_name = QFileDialog.getOpenFileName(self,'选择文件')
