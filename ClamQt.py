@@ -163,14 +163,15 @@ class WHITEWindow(QWidget):
         self.setLayout(conLayout)
 
         add.clicked.connect(lambda:self.add(tableWidget))
-        minus.clicked.connect(self.minus)
+        minus.clicked.connect(lambda:self.minus(tableWidget))
 
     def add(self,tableWidget):
         openfilename1 = QFileDialog.getExistingDirectory(self, '选择文件夹')
         tableWidget.setItem(openfilename1)
 
-    def minus(self):
-        #这个还需要写一下
+    def minus(self,tableWidget):
+        openfilename2 = QFileDialog.getExistingDirectory(self, '选择文件夹')
+        tableWidget.setItem(openfilename2)
 
 
 
