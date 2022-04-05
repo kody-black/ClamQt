@@ -8,7 +8,8 @@ from execute import *
 from MainUI import Ui_MainWindow
 
 # setor = [0, 0, 0, 0, 0, 0] #这个数组用来记录设置选择的内容
-
+Whitelist = [0, 0, 0, 0]
+Whitechoosen = [0, 0, 0, 0]
 class Window(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super().__init__()
@@ -155,6 +156,7 @@ class SETWindow(QWidget):
 
 #白名单页面布局
 class WHITEWindow(QWidget):
+    currow = 0
     def __init__(self):
         super().__init__()
         self.initUI()
@@ -171,6 +173,10 @@ class WHITEWindow(QWidget):
         tableWidget1.setHorizontalHeaderLabels(['Directory'])
         tableWidget1.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         
+        for j in range(4):
+            if Whitechoosen[j] == 1:
+                tableWidget1.setItem(j, 0, QtWidgets.QTableWidgetItem(Whitelist[j]))
+
 
         add = QPushButton('添加文件', self)
         minus = QPushButton('移出文件', self)
@@ -184,14 +190,45 @@ class WHITEWindow(QWidget):
 
         add.clicked.connect(lambda: self.add(tableWidget1))
         minus.clicked.connect(lambda: self.minus(tableWidget1))
+        tableWidget1.clicked.connect(lambda: self.click(tableWidget1))
 
     def add(self, tableWidget):
         openfilename1 = QFileDialog.getExistingDirectory(self, '选择文件夹')
-        tableWidget.setItem(0, 0, QtWidgets.QTableWidgetItem(openfilename1))
+        
+        cur = Whitechoosen[0] + Whitechoosen[1] + Whitechoosen[2] + Whitechoosen[3]
+        tableWidget.setItem(cur, 0, QtWidgets.QTableWidgetItem(openfilename1))
+        Whitelist[cur] = openfilename1
+        Whitechoosen[cur] = 1
 
     def minus(self, tableWidget):
-        openfilename2 = QFileDialog.getExistingDirectory(self, '选择文件夹')
+        #openfilename2 = QFileDialog.getExistingDirectory(self, '选择文件夹')
         #tableWidget.setItem(openfilename2)
+        #global currow
+        #tableWidget.removeRow(self.currow)
+        #思路是首先修改Whitelist和 Whitechoosen
+        #然后利用它们去重新构造tableWidget
+        curtemp = self.currow
+        cur = Whitechoosen[0] + Whitechoosen[1] + Whitechoosen[2] + Whitechoosen[3] - 1
+        for i in range(4):
+            if i == curtemp:
+                if i < cur :
+                    Whitelist[i] = Whitelist[i+1]
+                    Whitechoosen[i] = 1
+                    Whitechoosen[i+1] = 0
+                    tableWidget.setItem(i, 0, QtWidgets.QTableWidgetItem(Whitelist[i]))
+                else :
+                    Whitelist[i] = 0
+                    Whitechoosen[i] = 0
+                    tableWidget.setItem(i, 0, QtWidgets.QTableWidgetItem(' '))
+                curtemp = curtemp + 1
+
+    def click(self, tableWidget):
+        self.currow = tableWidget.currentRow()
+        print(self.currow)
+
+
+
+
         
 
 
