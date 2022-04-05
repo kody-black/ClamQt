@@ -88,6 +88,19 @@ class SETWindow(QWidget):
         
         bt.move(130, 370)
 
+        if setor[0] == 1:
+            self.cb1.setChecked(True)
+        if setor[1] == 1:
+            self.cb2.setChecked(True)
+        if setor[2] == 1:
+            self.cb3.setChecked(True)
+        if setor[3] == 1:
+            self.cb4.setChecked(True)
+        if setor[4] == 1:
+            self.cb5.setChecked(True)
+        if setor[5] == 1:
+            self.cb6.setChecked(True)
+
         self.cb1.stateChanged.connect(self.changecb1)
         self.cb2.stateChanged.connect(self.changecb2)
         self.cb3.stateChanged.connect(self.changecb3)
@@ -101,6 +114,8 @@ class SETWindow(QWidget):
 
     def cls(self):
         self.close()
+        for i in range(6):
+            print(setor[i])
 
     def changecb1(self):
         if self.cb1.checkState() == Qt.Checked:
@@ -177,6 +192,7 @@ class WHITEWindow(QWidget):
     def minus(self, tableWidget):
         openfilename2 = QFileDialog.getExistingDirectory(self, '选择文件夹')
         #tableWidget.setItem(openfilename2)
+        
 
 
 
