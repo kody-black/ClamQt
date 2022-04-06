@@ -45,6 +45,10 @@ class ControlBoard(QDialog, Ui_Dialog):
     def scan(self):
         print('病毒扫描中\n请稍候......\n')
         a = "clamscan"
+        for i in range(4):
+            if Whitechoosen[i] == 1:
+                a = a + " " + "--exclude-dir=" + Whitelist[i]
+
         if setor[3]== 1:
             a = a+" "+"--max-filesize=20M"
             print(a)
@@ -65,20 +69,8 @@ class ControlBoard(QDialog, Ui_Dialog):
         #       Don't scan file/directory names matching regular expression. These options  can  be
         #       used multiple times.
 
-    def choose(openfilename):
+    def choose(self, openfilename):
         print('病毒扫描中\n请稍候......\n')
-
-        # --exclude-pua=CATEGORY
-        #       Exclude a specific PUA category. This  option  can  be  used  multiple  times.
-        #  --include-pua=CATEGORY
-        #       Only  include  a specific PUA category. This option can be used multiple times.
-        # --heuristic-scan-precedence[=yes/no(*)]
-        #  --max-recursion=#n
-        #       Set archive recursion level limit. This option protects  your  system  against  DoS
-        #       attacks (default: 16).
-        # --exclude=REGEX, --exclude-dir=REGEX
-        #       Don't scan file/directory names matching regular expression. These options  can  be
-        #       used multiple times.
         if setor[3]== 1:
             a = "clamscan"+" "+"--max-filesize=20M"+" "+openfilename
             print(a)
