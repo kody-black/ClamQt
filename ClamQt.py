@@ -6,6 +6,7 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog, QInputDialog
 from execute import execute_fresh, execute_scan, execute_choose
 from execute import *
 from MainUI import Ui_MainWindow
+import webbrowser
 
 # setor = [0, 0, 0, 0, 0, 0] #这个数组用来记录设置选择的内容
 # Whitelist = [0, 0, 0, 0]
@@ -21,6 +22,8 @@ class Window(QMainWindow, Ui_MainWindow):
         self.choosefile.clicked.connect(self.beginChoose)
         self.whitelist.clicked.connect(self.beginWhite)
         self.setting.clicked.connect(self.beginSet)
+        self.help.clicked.connect(self.chelp)
+        self.pushButton.clicked.connect(self.chelp)
 
     def beginFresh(self):
         execute_fresh()
@@ -59,6 +62,12 @@ class Window(QMainWindow, Ui_MainWindow):
     def beginSet(self):
         self.set1 = SETWindow()
         self.set1.show()
+
+    def chelp(self):
+        webbrowser.open_new_tab('./manual/index.html')
+
+    def cabout(self):
+        webbrowser.open_new_tab('./manual/about.html')
 
 #设置界面布局（似乎不该写在这个文件里，后续调整）
 class SETWindow(QWidget):
