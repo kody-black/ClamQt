@@ -8,8 +8,9 @@ from execute import *
 from MainUI import Ui_MainWindow
 
 # setor = [0, 0, 0, 0, 0, 0] #这个数组用来记录设置选择的内容
-Whitelist = [0, 0, 0, 0]
-Whitechoosen = [0, 0, 0, 0]
+# Whitelist = [0, 0, 0, 0]
+# Whitechoosen = [0, 0, 0, 0]
+
 class Window(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super().__init__()
@@ -48,7 +49,7 @@ class Window(QMainWindow, Ui_MainWindow):
         openfile_name = QFileDialog.getExistingDirectory(self, '选择文件夹')
         # a = 'clamscan'+' '+openfile_name
         # print(a)
-        print(openfile_name)
+        #print(openfile_name)
         execute_choose(openfile_name)
 
     def beginWhite(self):
@@ -115,8 +116,8 @@ class SETWindow(QWidget):
 
     def cls(self):
         self.close()
-        for i in range(6):
-            print(setor[i])
+        # for i in range(6):
+        #     print(setor[i])
 
     def changecb1(self):
         if self.cb1.checkState() == Qt.Checked:
@@ -156,6 +157,8 @@ class SETWindow(QWidget):
 
 #白名单页面布局
 class WHITEWindow(QWidget):
+    global Whitelist
+    global Whitechoosen
     currow = 0
     def __init__(self):
         super().__init__()
@@ -224,7 +227,7 @@ class WHITEWindow(QWidget):
 
     def click(self, tableWidget):
         self.currow = tableWidget.currentRow()
-        print(self.currow)
+        #print(self.currow)
 
 
 
