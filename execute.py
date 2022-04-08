@@ -5,7 +5,6 @@ import sys
 import os
 from PyQt5.QtCore import  QEventLoop, QTimer, Qt
 from PyQt5.QtWidgets import QApplication, QMainWindow, QDialog, QFileDialog, QCheckBox, QPushButton, QWidget
- 
 from exeUI import Ui_Dialog
 
 setor = [0, 0, 0, 0, 0, 0] #这个数组用来记录设置选择的内容
@@ -44,7 +43,7 @@ class ControlBoard(QDialog, Ui_Dialog):
  
     def scan(self):
         print('病毒扫描中\n请稍候......\n')
-        a = "clamscan"
+        a = "clamscan --recursive /"
         for i in range(4):
             if Whitechoosen[i] == 1:
                 a = a + " " + "--exclude-dir=" + Whitelist[i]
@@ -72,10 +71,10 @@ class ControlBoard(QDialog, Ui_Dialog):
     def choose(self, openfilename):
         print('病毒扫描中\n请稍候......\n')
         if setor[3]== 1:
-            a = "clamscan"+" "+"--max-filesize=20M"+" "+openfilename
+            a = "clamscan --recursive"+" "+"--max-filesize=20M"+" "+openfilename
             print(a)
         else:
-            a = "clamscan"+" "+openfilename
+            a = "clamscan --recursive"+" "+openfilename
         d = os.popen(a)
         f = d.read()
         print(f)
